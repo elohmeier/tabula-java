@@ -1,4 +1,4 @@
-tabula-java [![Build Status](https://travis-ci.org/tabulapdf/tabula-java.svg?branch=master)](https://travis-ci.org/tabulapdf/tabula-java)
+tabula-java [![Build Status](https://github.com/elohmeier/tabula-java/actions/workflows/tests.yml/badge.svg)](https://github.com/elohmeier/tabula-java/actions/workflows/tests.yml)
 ===========
 
 `tabula-java` is a library for extracting tables from PDF files — it is the table extraction engine that powers [Tabula](http://tabula.technology/) ([repo](http://github.com/tabulapdf/tabula)). You can use `tabula-java` as a command-line tool to programmatically extract tables from PDFs.
@@ -113,7 +113,7 @@ try (PDDocument document = PDDocument.load(in)) {
 ```
 
 
-For more detail information check the Javadoc. 
+For more detail information check the Javadoc.
 The Javadoc API documentation can be generated (see also '_Building from Source_' section) via
 
 ```
