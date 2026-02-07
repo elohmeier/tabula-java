@@ -8,11 +8,21 @@ on:
 
 jobs:
   build-wheels:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-14]
+        include:
+          - os: ubuntu-latest
+            runner: ubuntu-latest
+            cibw_archs_linux: x86_64
+          - os: ubuntu-24.04-arm
+            runner: ubuntu-24.04-arm
+            cibw_archs_linux: aarch64
+          - os: windows-latest
+            runner: windows-latest
+          - os: macos-14
+            runner: macos-14
 
     steps:
       - uses: actions/checkout@v4
@@ -41,8 +51,8 @@ jobs:
         uses: pypa/cibuildwheel@v3.3.1
         env:
           CIBW_BUILD: "cp312-* cp313-* cp314-*"
-          CIBW_ARCHS_LINUX: "x86_64"
-          CIBW_SKIP: "pp* *-musllinux* *-win32"
+          CIBW_ARCHS_LINUX: ${{ matrix.cibw_archs_linux }}
+          CIBW_SKIP: "*-musllinux* *-win32"
           CIBW_BEFORE_BUILD: "python {package}/scripts/prepare_bundle.py"
           CIBW_REPAIR_WHEEL_COMMAND_MACOS: ""
           CIBW_TEST_COMMAND: "tabula-java --version"
