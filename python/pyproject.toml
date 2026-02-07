@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tabula-java"
-version = "0.1.2"
+version = "1.0.5"
 description = "Python wrapper that ships tabula-java with a bundled JRE"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -25,3 +25,7 @@ classifiers = [
 
 [project.scripts]
 tabula-java = "tabula_java_runtime.cli:main"
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+changelog_file = "CHANGELOG.md"

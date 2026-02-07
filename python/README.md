@@ -15,4 +15,4 @@ python -m build python
 
 ## Release wheels with cibuildwheel
 
-Use `.github/workflows/pypi.yml`.
+Use `.github/workflows/release.yml`.
