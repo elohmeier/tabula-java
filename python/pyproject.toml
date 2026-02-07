@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling>=1.25"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "tabula-java"
@@ -27,17 +27,3 @@ classifiers = [
 
 [project.scripts]
 tabula-java = "tabula_java_runtime.cli:main"
-
-[tool.hatch.build.targets.wheel]
-pure-python = false
-packages = ["src/tabula_java_runtime"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-  "src/tabula_java_runtime",
-  "scripts/prepare_bundle.py",
-  "README.md",
-]
-
-[tool.hatch.build]
-include = ["src/tabula_java_runtime/runtime/**/*"]
