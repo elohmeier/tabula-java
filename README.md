@@ -9,6 +9,13 @@ tabula-java [![Build Status](https://github.com/elohmeier/tabula-java/actions/wo
 
 Download a version of the tabula-java's jar, with all dependencies included, that works on Mac, Windows and Linux from our [releases page](../../releases).
 
+Nightly container images are also published to GHCR:
+
+```
+docker pull ghcr.io/elohmeier/tabula-java:latest
+docker run --rm ghcr.io/elohmeier/tabula-java:latest --help
+```
+
 ## Commandline Usage Examples
 
 `tabula-java` provides a command line application:
