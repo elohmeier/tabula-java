@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-14]
+        os: [windows-latest, macos-14]
 
     steps:
       - uses: actions/checkout@v4
@@ -44,8 +44,7 @@ jobs:
         uses: pypa/cibuildwheel@v2.23.2
         env:
           CIBW_BUILD: "cp312-* cp313-* cp314-*"
-          CIBW_SKIP: "pp* *-musllinux* *-manylinux_i686 *-win32"
-          CIBW_REPAIR_WHEEL_COMMAND_LINUX: ""
+          CIBW_SKIP: "pp* *-manylinux* *-musllinux* *-win32"
           CIBW_REPAIR_WHEEL_COMMAND_MACOS: ""
           CIBW_TEST_COMMAND: "tabula-java --version"
         with:
