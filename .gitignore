@@ -7,3 +7,10 @@
 /src/test/resources/technology/tabula/icdar2013-dataset/test-statistics.json
 /target/
 *.iml
+
+# Python packaging artifacts
+python/src/tabula_java_runtime/runtime/
+.cache/jdk25/
+python/wheelhouse/
+python/dist/
+python/tabula.jar

@@ -16,6 +16,8 @@ docker pull ghcr.io/elohmeier/tabula-java:latest
 docker run --rm ghcr.io/elohmeier/tabula-java:latest --help
 ```
 
+Experimental Python wheels (bundled JRE + tabula-java) are built with `cibuildwheel` via `.github/workflows/pypi.yml`.
+
 ## Commandline Usage Examples
 
 `tabula-java` provides a command line application:
