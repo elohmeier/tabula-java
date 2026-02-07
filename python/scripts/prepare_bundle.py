@@ -175,8 +175,33 @@ def _build_runtime(jdeps: str, jlink: str, jar_path: Path, runtime_dir: Path) ->
         ]
     )
 
+    # jlink places libjvm.so in lib/server, while several JRE libs link against
+    # libjvm.so with RPATH=$ORIGIN (lib). Keep a copy in lib so auditwheel can
+    # resolve internal dependencies when repairing Linux wheels.
+    if sys.platform.startswith("linux"):
+        lib_dir = jre_out / "lib"
+        libjvm_server = lib_dir / "server" / "libjvm.so"
+        libjvm_flat = lib_dir / "libjvm.so"
+        if libjvm_server.exists() and not libjvm_flat.exists():
+            shutil.copy2(libjvm_server, libjvm_flat)
+
+        # Remove optional desktop/audio native libraries that depend on X11/ALSA
+        # system libraries unavailable in manylinux images. Tabula runs headless.
+        for relpath in ("lib/libawt_xawt.so", "lib/libjawt.so", "lib/libjsound.so"):
+            candidate = jre_out / relpath
+            if candidate.exists():
+                candidate.unlink()
+
 
 def main() -> int:
+    package_root = _package_root()
+    build_dir = package_root / "build"
+    if build_dir.exists():
+        shutil.rmtree(build_dir)
+    for egg_info in (package_root / "src").glob("*.egg-info"):
+        if egg_info.exists():
+            shutil.rmtree(egg_info)
+
     runtime_dir = _runtime_dir()
     if runtime_dir.exists():
         shutil.rmtree(runtime_dir)
