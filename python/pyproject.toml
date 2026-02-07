@@ -29,6 +29,7 @@ classifiers = [
 tabula-java = "tabula_java_runtime.cli:main"
 
 [tool.hatch.build.targets.wheel]
+pure-python = false
 packages = ["src/tabula_java_runtime"]
 
 [tool.hatch.build.targets.sdist]
