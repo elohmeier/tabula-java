@@ -38,7 +38,7 @@ jobs:
           cp "$JAR_PATH" python/tabula.jar
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.23.2
+        uses: pypa/cibuildwheel@v3.3.1
         env:
           CIBW_BUILD: "cp312-* cp313-* cp314-*"
           CIBW_ARCHS_LINUX: "x86_64"
