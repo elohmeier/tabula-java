@@ -79,7 +79,13 @@ def _download_jdk_cache() -> Path:
         f"{os_id}/{arch}/jdk/hotspot/normal/eclipse"
     )
     print(f"Downloading JDK 25 from {url}")
-    urllib.request.urlretrieve(url, archive_path)
+    try:
+        request = urllib.request.Request(url, headers={"User-Agent": "tabula-java-cibuildwheel/1.0"})
+        with urllib.request.urlopen(request) as response, archive_path.open("wb") as out:
+            shutil.copyfileobj(response, out)
+    except Exception:
+        # Fallback to urlretrieve for environments where custom request handling behaves differently.
+        urllib.request.urlretrieve(url, archive_path)
 
     tmp_extract = cache_root / f"extract-{os_id}-{arch}"
     if tmp_extract.exists():
