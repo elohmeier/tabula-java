@@ -45,6 +45,8 @@ jobs:
         env:
           CIBW_BUILD: "cp39-* cp310-* cp311-* cp312-* cp313-*"
           CIBW_SKIP: "pp* *-musllinux* *-manylinux_i686 *-win32"
+          CIBW_REPAIR_WHEEL_COMMAND_LINUX: ""
+          CIBW_REPAIR_WHEEL_COMMAND_MACOS: ""
           CIBW_TEST_COMMAND: "tabula-java --version"
         with:
           package-dir: python
